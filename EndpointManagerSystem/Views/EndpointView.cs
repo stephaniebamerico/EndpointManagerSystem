@@ -57,7 +57,7 @@ namespace EndpointManager.Views
 
         public bool RequestConfirmation()
         {
-            DisplayMessage("This action cannot be undone. Are you sure you want to proceed? (N)o/(y)es");
+            DisplayMessage("This action cannot be undone. Are you sure you want to proceed? (N)o/(y)es ");
             switch(ReadLine())
             {
                 case "Y": case "y": case "Yes": case "YES": case "yes":
