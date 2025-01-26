@@ -14,16 +14,16 @@ namespace EndpointManager.Controllers
             if(repository.Find(endpointDTO.SerialNumber) != null)
                 throw new Exception("Endpoint with this serial number already exists.");
 
-            ValidateMeterModel(MeterModel.Value(endpointDTO.ModelId));
-            ValidateSwitchState(SwitchState.Value(endpointDTO.SwitchState));
+            var meterModel = MeterModel.Value(endpointDTO.ModelId);
+            var switchState = SwitchState.Value(endpointDTO.SwitchState);
 
             var endpoint = new Endpoint()
             {
                 SerialNumber = endpointDTO.SerialNumber,
-                ModelId = MeterModel.Value(endpointDTO.ModelId),
+                ModelId = meterModel,
                 MeterNumber = endpointDTO.MeterNumber,
                 MeterFirmwareVersion = endpointDTO.MeterFirmwareVersion,
-                SwitchState = SwitchState.Value(endpointDTO.SwitchState)
+                SwitchState = switchState
             };
 
             repository.Insert(endpoint);
@@ -35,7 +35,6 @@ namespace EndpointManager.Controllers
             var endpoint = repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
 
             var switchState = SwitchState.Value(endpointView.RequestSwitchState());
-            ValidateSwitchState(switchState);
             
             if(endpoint.SwitchState == switchState)
                 throw new Exception("Same Switch State value already registered.");
@@ -94,22 +93,6 @@ namespace EndpointManager.Controllers
             };
 
             endpointView.DisplayEndpoint(endpointDTO);
-        }
-
-        private static void ValidateMeterModel(int meterModel)
-        {
-            var validModelIds = MeterModel.ValueOptions();
-            
-            if(!validModelIds.Contains(meterModel))
-                throw new Exception("Meter Model not valid.");
-        }
-
-        private static void ValidateSwitchState(int switchState)
-        {
-            var validSwitchStates = SwitchState.ValueOptions();
-            
-            if(!validSwitchStates.Contains(switchState))
-                throw new Exception("Switch State not valid.");
         }
     }
 }

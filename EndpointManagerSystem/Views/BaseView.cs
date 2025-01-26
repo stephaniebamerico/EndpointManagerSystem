@@ -16,7 +16,10 @@ namespace EndpointManager.Views
 
         public string ReadLine()
         {
-            return Console.ReadLine() ?? "";
+            var input = Console.ReadLine() ?? throw new Exception("Empty input.");
+            if (input.Length == 0)
+                throw new Exception("Empty input.");
+            return input;
         }
 
         public int ReadInt()
