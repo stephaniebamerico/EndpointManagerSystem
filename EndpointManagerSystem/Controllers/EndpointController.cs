@@ -1,7 +1,5 @@
 using EndpointManager.Interfaces;
-using EndpointManager.Repositories;
 using EndpointManager.Models;
-using EndpointManager.Views;
 
 namespace EndpointManager.Controllers
 {
