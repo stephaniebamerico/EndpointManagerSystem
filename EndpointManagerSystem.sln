@@ -1,8 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointManagerSystem", "EndpointManagerSystem\EndpointManagerSystem.csproj", "{70A2C2E5-24AE-1E2F-1E62-EE5E8D921672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointManagerSystem.Tests", "EndpointManagerSystem.Tests\EndpointManagerSystem.Tests.csproj", "{1A0899D1-C6FE-4E02-8FD7-99D61413D3FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{70A2C2E5-24AE-1E2F-1E62-EE5E8D921672}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70A2C2E5-24AE-1E2F-1E62-EE5E8D921672}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70A2C2E5-24AE-1E2F-1E62-EE5E8D921672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0899D1-C6FE-4E02-8FD7-99D61413D3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0899D1-C6FE-4E02-8FD7-99D61413D3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0899D1-C6FE-4E02-8FD7-99D61413D3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0899D1-C6FE-4E02-8FD7-99D61413D3FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
