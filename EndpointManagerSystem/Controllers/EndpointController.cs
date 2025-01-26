@@ -5,22 +5,13 @@ using EndpointManager.Views;
 
 namespace EndpointManager.Controllers
 {
-    public class EndpointController: IEndpointController
+    public class EndpointController(IEndpointRepository repository, IEndpointView endpointView) : IEndpointController
     {
-        private readonly IEndpointRepository _repository;
-        private readonly EndpointView _endpointView;
-
-        public EndpointController()
-        {
-            _repository = new EndpointRepository();
-            _endpointView = new EndpointView();
-        }
-
         public void InsertEndpoint()
         {
-            var endpointDTO = _endpointView.RequestEndpoint();
+            var endpointDTO = endpointView.RequestEndpoint();
 
-            if(_repository.Find(endpointDTO.SerialNumber) != null)
+            if(repository.Find(endpointDTO.SerialNumber) != null)
                 throw new Exception("Endpoint with this serial number already exists.");
 
             ValidateMeterModel(MeterModel.Value(endpointDTO.ModelId));
@@ -35,32 +26,32 @@ namespace EndpointManager.Controllers
                 SwitchState = SwitchState.Value(endpointDTO.SwitchState)
             };
 
-            _repository.Insert(endpoint);
+            repository.Insert(endpoint);
         }
 
         public void EditEndpoint()
         {
-            var serialNumber = _endpointView.RequestSerialNumber();
-            var endpoint = _repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
+            var serialNumber = endpointView.RequestSerialNumber();
+            var endpoint = repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
 
-            var switchState = SwitchState.Value(_endpointView.RequestSwitchState());
+            var switchState = SwitchState.Value(endpointView.RequestSwitchState());
             ValidateSwitchState(switchState);
             
             if(endpoint.SwitchState == switchState)
                 throw new Exception("Same Switch State value already registered.");
 
-            _repository.Edit(serialNumber, switchState);
+            repository.Edit(serialNumber, switchState);
         }
 
         public string? DeleteEndpoint()
         {
-            var serialNumber = _endpointView.RequestSerialNumber();
+            var serialNumber = endpointView.RequestSerialNumber();
 
-            if(_repository.Find(serialNumber) == null)
+            if(repository.Find(serialNumber) == null)
                 throw new Exception("Endpoint not found.");
             
-            if(_endpointView.RequestConfirmation())
-                _repository.Delete(serialNumber);
+            if(endpointView.RequestConfirmation())
+                repository.Delete(serialNumber);
             else
                 return null;
             
@@ -69,7 +60,7 @@ namespace EndpointManager.Controllers
 
         public void ListAllEndpoints()
         {
-            var endpoints = _repository.ListAll();
+            var endpoints = repository.ListAll();
 
             var endpointsDTO = new List<EndpointDTO>();
             foreach (var endpoint in endpoints)
@@ -85,13 +76,13 @@ namespace EndpointManager.Controllers
 
                 endpointsDTO.Add(endpointDTO);
             }
-            _endpointView.DisplayEndpoints(endpointsDTO.ToArray());
+            endpointView.DisplayEndpoints(endpointsDTO.ToArray());
         }
 
         public void FindEndpointBySerialNumber()
         {
-            var serialNumber = _endpointView.RequestSerialNumber();
-            var endpoint = _repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
+            var serialNumber = endpointView.RequestSerialNumber();
+            var endpoint = repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
 
             var endpointDTO = new EndpointDTO()
             {
@@ -102,7 +93,7 @@ namespace EndpointManager.Controllers
                 SwitchState = SwitchState.Name(endpoint.SwitchState)
             };
 
-            _endpointView.DisplayEndpoint(endpointDTO);
+            endpointView.DisplayEndpoint(endpointDTO);
         }
 
         private static void ValidateMeterModel(int meterModel)

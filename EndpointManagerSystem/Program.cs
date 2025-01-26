@@ -1,14 +1,24 @@
 ﻿using EndpointManager.Controllers;
+using EndpointManager.Interfaces;
+using EndpointManager.Repositories;
 using EndpointManager.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 class Program
 {
     static void Main(string[] args)
     {
-        var view = new BaseView();
-        var controller = new EndpointController();
-        bool exit = false;
+        var services = new ServiceCollection();
+        services.AddSingleton<IView, BaseView>();
+        services.AddSingleton<IEndpointView, EndpointView>();
+        services.AddSingleton<IEndpointRepository, EndpointRepository>();
+        services.AddSingleton<IEndpointController, EndpointController>();
+        var serviceProvider = services.BuildServiceProvider();
 
+        var view = serviceProvider.GetRequiredService<IView>();
+        var controller = serviceProvider.GetRequiredService<IEndpointController>();
+
+        bool exit = false;
         while (!exit)
         {
             view.DisplayLine("===================================");
