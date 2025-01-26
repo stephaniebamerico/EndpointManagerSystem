@@ -12,7 +12,7 @@ namespace EndpointManager.Models
 
         public static string Name(int meterModelId)
         {
-            return Enum.GetName(typeof(MeterModelId), meterModelId) ?? throw new Exception("Meter Model not found.");
+            return Enum.GetName(typeof(MeterModelId), meterModelId) ?? throw new Exception("Meter Model not valid.");
         }
 
         public static int Value(string meterModel)
@@ -20,7 +20,7 @@ namespace EndpointManager.Models
             if (Enum.TryParse<MeterModelId>(meterModel, true, out MeterModelId meterModelId))
                 return (int) meterModelId;
             else
-                throw new Exception("Meter Model not found.");
+                throw new Exception("Meter Model not valid.");
         }
 
         public static string[] NameOptions()

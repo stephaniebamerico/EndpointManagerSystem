@@ -11,7 +11,7 @@ namespace EndpointManager.Models
 
         public static string Name(int switchState)
         {
-            return Enum.GetName(typeof(SwitchStateId), switchState) ?? throw new Exception("Switch State not found.");
+            return Enum.GetName(typeof(SwitchStateId), switchState) ?? throw new Exception("Switch State not valid.");
         }
 
         public static int Value(string switchState)
@@ -19,7 +19,7 @@ namespace EndpointManager.Models
             if (Enum.TryParse<SwitchStateId>(switchState, true, out SwitchStateId switchStateId))
                 return (int) switchStateId;
             else
-                throw new Exception("Switch State not found.");
+                throw new Exception("Switch State not valid.");
         }
 
         public static string[] NameOptions()
