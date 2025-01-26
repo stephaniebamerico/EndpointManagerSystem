@@ -41,6 +41,14 @@ namespace EndpointManagerSystem.Tests
                     MeterNumber = 0,
                     MeterFirmwareVersion = "v1.8",
                     SwitchState = 0
+                },
+                new Endpoint()
+                {
+                    SerialNumber = "W29",
+                    ModelId = 18,
+                    MeterNumber = 29,
+                    MeterFirmwareVersion = "v2.0",
+                    SwitchState = 1
                 }
             };
 
@@ -82,6 +90,14 @@ namespace EndpointManagerSystem.Tests
                     MeterNumber = 0,
                     MeterFirmwareVersion = "v1.8",
                     SwitchState = "Disconnected"
+                },
+                new()
+                {
+                    SerialNumber = "W29",
+                    ModelId = "NSX2P3W",
+                    MeterNumber = 29,
+                    MeterFirmwareVersion = "v2.0",
+                    SwitchState = "Connected"
                 }
             };
         }
@@ -94,7 +110,8 @@ namespace EndpointManagerSystem.Tests
                 ("Connected", 1),
                 ("Disconnected", 0),
                 ("Armed", 2),
-                ("Armed", 2)
+                ("Armed", 2),
+                ("Disconnected", 0)
             };
 
         }
