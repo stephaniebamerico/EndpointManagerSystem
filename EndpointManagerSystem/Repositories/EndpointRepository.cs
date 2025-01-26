@@ -3,6 +3,8 @@ using EndpointManager.Models;
 
 namespace EndpointManager.Repositories
 {
+    /* The Repository is responsible for encapsulating the data access logic,
+     * contributing to the isolation of the data access layer from the business layer. */
     public class EndpointRepository : IEndpointRepository
     {
         private readonly List<Endpoint> _endpoints;

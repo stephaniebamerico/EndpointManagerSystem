@@ -3,6 +3,9 @@ using EndpointManager.Models;
 
 namespace EndpointManager.Controllers
 {
+    /* Controller is responsible for the main application logic and integrity of operations.
+     * The Controller acts as an intermediary between the View, which interacts with the user,
+     * and the Repository, which is responsible for data persistence. */
     public class EndpointController(IEndpointRepository repository, IEndpointView endpointView) : IEndpointController
     {
         public void InsertEndpoint()
@@ -12,6 +15,7 @@ namespace EndpointManager.Controllers
             if(repository.Find(endpointDTO.SerialNumber) != null)
                 throw new Exception("Endpoint with this serial number already exists.");
 
+            // Input validation and conversion from human-readable format
             var meterModel = MeterModel.Value(endpointDTO.ModelId);
             var switchState = SwitchState.Value(endpointDTO.SwitchState);
 
@@ -32,6 +36,7 @@ namespace EndpointManager.Controllers
             var serialNumber = endpointView.RequestSerialNumber();
             var endpoint = repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
 
+            // Input validation and conversion from human-readable format
             var switchState = SwitchState.Value(endpointView.RequestSwitchState());
             
             if(endpoint.SwitchState == switchState)
@@ -59,6 +64,7 @@ namespace EndpointManager.Controllers
         {
             var endpoints = repository.ListAll();
 
+            // Conversion to human-readable format
             var endpointsDTO = new List<EndpointDTO>();
             foreach (var endpoint in endpoints)
             {
@@ -81,6 +87,7 @@ namespace EndpointManager.Controllers
             var serialNumber = endpointView.RequestSerialNumber();
             var endpoint = repository.Find(serialNumber) ?? throw new Exception("Endpoint not found.");
 
+            // Conversion to human-readable format
             var endpointDTO = new EndpointDTO()
             {
                 SerialNumber = endpoint.SerialNumber,

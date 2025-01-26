@@ -2,6 +2,7 @@ namespace EndpointManager.Models
 {
     public static class SwitchState
     {
+        // All Switch States accepted
         private enum SwitchStateId
         {
             Disconnected = 0,

@@ -2,6 +2,7 @@ namespace EndpointManager.Models
 {
     public static class MeterModel
     {
+        // All Meter Models accepted
         private enum MeterModelId
         {
             NSX1P2W = 16,

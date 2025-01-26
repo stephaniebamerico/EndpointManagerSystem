@@ -2,6 +2,7 @@ using EndpointManager.Interfaces;
 
 namespace EndpointManager.Views
 {
+    // Base View, responsible for the most basic user interactions.
     public class BaseView : IView
     {
         public void DisplayMessage(string message)

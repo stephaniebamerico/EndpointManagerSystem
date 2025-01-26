@@ -3,6 +3,7 @@ using EndpointManager.Models;
 
 namespace EndpointManager.Views
 {
+    // Endpoint View, responsible for user interaction involving Endpoints.
     public class EndpointView : BaseView, IEndpointView
     {
         public EndpointDTO RequestEndpoint()

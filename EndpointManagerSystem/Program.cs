@@ -6,8 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 class Program
 {
+    // Application menu, responsible for reading operations and displaying their results
     static void Main(string[] args)
     {
+        // Dependency injection
         var services = new ServiceCollection();
         services.AddSingleton<IView, BaseView>();
         services.AddSingleton<IEndpointView, EndpointView>();
@@ -18,6 +20,7 @@ class Program
 
         var view = serviceProvider.GetRequiredService<IView>();
         var controller = serviceProvider.GetRequiredService<IEndpointController>();
+        // End of dependency injection
 
         bool exit = false;
         while (!exit)

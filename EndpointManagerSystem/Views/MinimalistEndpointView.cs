@@ -3,6 +3,8 @@ using EndpointManager.Models;
 
 namespace EndpointManager.Views
 {
+    /* Minimalist Endpoint View, responsible for user interaction involving Endpoints.
+     * This is an easy way to test dependency injection in this project. */
     public class MinimalistEndpointView : BaseView, IEndpointView
     {
         public EndpointDTO RequestEndpoint()
