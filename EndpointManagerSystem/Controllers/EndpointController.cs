@@ -76,7 +76,7 @@ namespace EndpointManager.Controllers
 
                 endpointsDTO.Add(endpointDTO);
             }
-            endpointView.DisplayEndpoints(endpointsDTO.ToArray());
+            endpointView.DisplayEndpoints(endpointsDTO);
         }
 
         public void FindEndpointBySerialNumber()

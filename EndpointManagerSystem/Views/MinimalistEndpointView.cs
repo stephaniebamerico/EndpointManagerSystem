@@ -72,9 +72,9 @@ namespace EndpointManager.Views
             }
         }
 
-        public void DisplayEndpoints(EndpointDTO[] endpoints)
+        public void DisplayEndpoints(List<EndpointDTO> endpoints)
         {
-            if(endpoints == null || endpoints.Length == 0)
+            if(endpoints == null || endpoints.Count == 0)
                 DisplayLine("No endpoints registered.");
             else
             {

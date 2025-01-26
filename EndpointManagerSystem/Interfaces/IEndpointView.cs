@@ -12,7 +12,7 @@ namespace EndpointManager.Interfaces
 
         bool RequestConfirmation();
 
-        void DisplayEndpoints(EndpointDTO[] endpoints);
+        void DisplayEndpoints(List<EndpointDTO> endpoints);
 
         void DisplayEndpoint(EndpointDTO endpointDTO);
     }
