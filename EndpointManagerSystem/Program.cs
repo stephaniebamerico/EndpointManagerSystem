@@ -11,6 +11,7 @@ class Program
         var services = new ServiceCollection();
         services.AddSingleton<IView, BaseView>();
         services.AddSingleton<IEndpointView, EndpointView>();
+        // services.AddSingleton<IEndpointView, MinimalistEndpointView>();
         services.AddSingleton<IEndpointRepository, EndpointRepository>();
         services.AddSingleton<IEndpointController, EndpointController>();
         var serviceProvider = services.BuildServiceProvider();
