@@ -1,0 +1,100 @@
+﻿using EndpointManager.Controllers;
+using EndpointManager.Views;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var view = new BaseView();
+        var controller = new EndpointController();
+        bool exit = false;
+
+        while (!exit)
+        {
+            view.DisplayLine("===================================");
+            view.DisplayLine("Welcome to Endpoint Manager System");
+            view.DisplayLine("===================================");
+            view.DisplayLine("1) Insert a new endpoint");
+            view.DisplayLine("2) Edit an existing endpoint");
+            view.DisplayLine("3) Delete an existing endpoint");
+            view.DisplayLine("4) List all endpoints");
+            view.DisplayLine("5) Find a endpoint by \"Endpoint Serial Number\"");
+            view.DisplayLine("6) Exit");
+            view.DisplayMessage("Choose an option: ");
+
+            switch (view.ReadLine())
+            {
+                case "1":
+                    try
+                    {
+                        controller.InsertEndpoint();
+                        view.DisplayLine("Endpoint was created successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        view.DisplayLine($"Error: {ex.Message} Endpoint was not created.");
+                    }
+                    break;
+                
+                case "2":
+                    try
+                    {
+                        controller.EditEndpoint();
+                        view.DisplayLine("Endpoint was edited successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        view.DisplayLine($"Error: {ex.Message} Endpoint was not edited.");
+                    }
+                    break;
+                
+                case "3":
+                    try
+                    {
+                        var serialNumber = controller.DeleteEndpoint();
+                        if(serialNumber != null)
+                            view.DisplayLine($"Endpoint {serialNumber} was deleted successfully.");
+                        else
+                            view.DisplayLine("Operation cancelled.");
+                    }
+                    catch (Exception ex)
+                    {
+                        view.DisplayLine($"Error: {ex.Message} Endpoint was not deleted.");
+                    }
+                    break;
+
+                case "4":
+                    try
+                    {
+                        controller.ListAllEndpoints();
+                    }
+                    catch(Exception ex)
+                    {
+                        view.DisplayLine($"Error: {ex.Message}");
+                    }
+                    break;
+
+                case "5":
+                    try
+                    {
+                        controller.FindEndpointBySerialNumber();
+                    }
+                    catch(Exception ex)
+                    {
+                        view.DisplayLine($"Error: {ex.Message}");
+                    }
+                    break;
+
+                case "6":
+                    exit = true;
+                    break;
+                
+                default:
+                    view.DisplayLine("Invalid option.");
+                    break;
+            }
+
+            view.DisplayLine("");
+        }
+    }
+}
